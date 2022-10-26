@@ -16,88 +16,226 @@
  * limitations under the License.
  */
 
-$bpk-spacing-v2: true;
+ $bpk-spacing-v2: true;
 
-@mixin bpk-chip {
-  display: inline-flex;
-  height: bpk-spacing-xl();
-  padding: 0 bpk-spacing-base();
-  align-items: center;
-  border: none;
-  border-radius: $bpk-border-radius-xs * 2;
-
-  &--has-trailing {
-    padding-right: bpk-spacing-md();
-  }
-
-  &--on-dark {
-    background-color: transparent;
-    color: $bpk-text-on-dark-day;
-
-    @include bpk-border-sm($bpk-line-on-dark-day);
-
-    @include bpk-hover {
-      @include bpk-border-sm($bpk-surface-elevated-day);
-    }
-
-    &-selected {
-      @include bpk-themeable-property(
-        color,
-        --bpk-chip-on-dark-selected-text-color,
-        $bpk-text-primary-day
-      );
-      @include bpk-themeable-property(
-        background-color,
-        --bpk-chip-on-dark-selected-background-color,
-        $bpk-surface-default-day
-      );
-      @include bpk-border-sm(transparent);
-    }
-  }
-
-  &--default {
-    background-color: transparent;
-    color: $bpk-text-primary-day;
-
-    @include bpk-border-sm($bpk-line-day);
-
-    @include bpk-hover {
-      @include bpk-border-sm($bpk-surface-contrast-day);
-    }
-
-    &-selected {
-      @include bpk-themeable-property(
-        color,
-        --bpk-chip-default-selected-text-color,
-        $bpk-text-on-dark-day
-      );
-      @include bpk-themeable-property(
-        background-color,
-        --bpk-chip-default-selected-background-color,
-        $bpk-core-primary-day
-      );
-      @include bpk-border-sm(transparent);
-    }
-  }
-
-  &--disabled {
-    background-color: $bpk-private-chip-disabled-background-day;
-    color: $bpk-text-disabled-day;
-
-    @include bpk-border-sm(transparent);
-  }
-
-  &__leading-accessory-view {
-    display: inline-flex;
-    fill: currentColor;
-
-    @include bpk-margin-trailing(bpk-spacing-md());
-  }
-
-  &__trailing-accessory-view {
-    display: inline-flex;
-    fill: currentColor;
-
-    @include bpk-margin-leading(bpk-spacing-md());
-  }
-}
+ @mixin bpk-chip {
+   display: inline-flex;
+   height: bpk-spacing-xl();
+   padding: 0 bpk-spacing-base();
+   align-items: center;
+   border: none;
+   border-radius: $bpk-border-radius-xs * 2;
+ 
+   svg {
+     width: 16 * $bpk-one-pixel-rem !important;
+     height: 16 * $bpk-one-pixel-rem !important;
+   }
+ 
+   &--has-trailing {
+     padding-right: bpk-spacing-md();
+   }
+ 
+   &__leading-accessory-view {
+     display: inline-flex;
+     fill: currentColor;
+ 
+     @include bpk-margin-trailing(bpk-spacing-md());
+   }
+ 
+   &__trailing-accessory-view {
+     display: inline-flex;
+     fill: currentColor;
+ 
+     @include bpk-margin-leading(bpk-spacing-md());
+   }
+ 
+   &--on-dark {
+     background-color: transparent;
+     color: $bpk-text-on-dark-day;
+ 
+     @include bpk-border-sm($bpk-line-on-dark-day);
+ 
+     @include bpk-hover {
+       @include bpk-border-sm($bpk-surface-default-day);
+     }
+ 
+     &:active:not(:disabled) {
+       @include bpk-border-sm($bpk-surface-default-day);
+     }
+ 
+     &-selected {
+       @include bpk-themeable-property(
+         color,
+         --bpk-chip-on-dark-selected-text-color,
+         $bpk-text-on-light-day
+       );
+       @include bpk-themeable-property(
+         background-color,
+         --bpk-chip-on-dark-selected-background-color,
+         $bpk-surface-default-day
+       );
+       @include bpk-border-sm(transparent);
+ 
+       @include bpk-hover {
+         @include bpk-border-sm(transparent);
+       }
+ 
+       &:active:not(:disabled) {
+         @include bpk-border-sm(transparent);
+       }
+     }
+ 
+     &-dismissible {
+       &__trailing-accessory-view {
+         fill: $bpk-text-secondary-day;
+       }
+ 
+       @include bpk-hover {
+         svg {
+           fill: currentColor;
+         }
+       }
+ 
+       &:active:not(:disabled) {
+         svg {
+           fill: currentColor;
+         }
+       }
+     }
+ 
+     &-disabled {
+       @include bpk-border-sm(transparent);
+     }
+   }
+ 
+   &--default {
+     background-color: transparent;
+     color: $bpk-text-primary-day;
+ 
+     @include bpk-border-sm($bpk-line-day);
+ 
+     @include bpk-hover {
+       @include bpk-border-sm($bpk-core-primary-day);
+     }
+ 
+     &:active:not(:disabled) {
+       @include bpk-border-sm($bpk-core-primary-day);
+     }
+ 
+     &-selected {
+       @include bpk-themeable-property(
+         color,
+         --bpk-chip-default-selected-text-color,
+         $bpk-text-on-dark-day
+       );
+       @include bpk-themeable-property(
+         background-color,
+         --bpk-chip-default-selected-background-color,
+         $bpk-core-primary-day
+       );
+       @include bpk-border-sm(transparent);
+ 
+       @include bpk-hover {
+         @include bpk-border-sm(transparent);
+       }
+ 
+       &:active:not(:disabled) {
+         @include bpk-border-sm(transparent);
+       }
+     }
+ 
+     &-dismissible {
+       &__trailing-accessory-view {
+         fill: $bpk-text-disabled-on-dark-day;
+       }
+ 
+       @include bpk-hover {
+         svg {
+           fill: currentColor;
+         }
+       }
+ 
+       &:active:not(:disabled) {
+         svg {
+           fill: currentColor;
+         }
+       }
+     }
+ 
+     &-disabled {
+       @include bpk-border-sm(transparent);
+     }
+   }
+ 
+   &--on-image {
+     background-color: $bpk-surface-default-day;
+     color: $bpk-text-primary-day;
+ 
+     @include bpk-box-shadow-sm();
+ 
+     @include bpk-hover {
+       background-color: $bpk-canvas-contrast-day;
+     }
+ 
+     &:active:not(:disabled) {
+       background-color: $bpk-canvas-contrast-day;
+     }
+ 
+     &-selected {
+       @include bpk-themeable-property(
+         color,
+         --bpk-chip-on-image-selected-text-color,
+         $bpk-text-on-dark-day
+       );
+       @include bpk-themeable-property(
+         background-color,
+         --bpk-chip-on-image-selected-background-color,
+         $bpk-core-primary-day
+       );
+ 
+       @include bpk-hover {
+         @include bpk-themeable-property(
+           background-color,
+           --bpk-chip-on-image-selected-hover-background-color,
+           $bpk-core-primary-day
+         );
+       }
+ 
+       &:active:not(:disabled) {
+         @include bpk-themeable-property(
+           background-color,
+           --bpk-chip-on-image-selected-active-background-color,
+           $bpk-core-primary-day
+         );
+       }
+     }
+ 
+     &-dismissible {
+       &__trailing-accessory-view {
+         fill: $bpk-text-disabled-on-dark-day;
+       }
+ 
+       @include bpk-hover {
+         svg  {
+           fill: currentColor;
+         }
+       }
+ 
+       &:active:not(:disabled) {
+         svg {
+           fill: currentColor;
+         }
+       }
+     }
+ 
+     &-disabled {
+       @include bpk-box-shadow-sm();
+     }
+   }
+ 
+   &--disabled {
+     background-color: $bpk-private-chip-disabled-background-day;
+     color: $bpk-text-disabled-day;
+   }
+ }
+ 
